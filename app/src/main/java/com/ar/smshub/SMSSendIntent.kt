@@ -8,6 +8,7 @@ import android.os.AsyncTask
 import android.util.Log
 import khttp.responses.Response
 import org.jetbrains.anko.doAsync
+import org.json.JSONObject
 
 
 class SMSSendIntent : BroadcastReceiver() {
@@ -40,11 +41,13 @@ class SMSSendIntent : BroadcastReceiver() {
                 Log.d("-->", "Post status to " + statusUrl)
                 res = khttp.post(
                     url = statusUrl,
-                    data = mapOf(
-                        "deviceId" to deviceId,
-                        "messageId" to messageId,
-                        "status" to status,
-                        "action" to "STATUS_UPDATE"
+                    data = JSONObject(
+                        mapOf(
+                            "deviceId" to deviceId,
+                            "messageId" to messageId,
+                            "status" to status,
+                            "action" to "STATUS_UPDATE"
+                        )
                     )
                 )
                 Log.d("----->", res.text)
