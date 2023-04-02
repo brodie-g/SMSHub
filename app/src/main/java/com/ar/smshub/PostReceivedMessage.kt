@@ -14,10 +14,9 @@ class PostReceivedMessage : AsyncTask<String, Void, String>() {
         val smsBody = params[2]
         val smsSender = params[3]
         try {
-            lateinit var apiResponse : Response
 
             Log.d("-->", "POSTing SMS to $receiveURL")
-            apiResponse = khttp.post(
+            val apiResponse : Response = khttp.post(
                 url = receiveURL,
                 data = JSONObject(
                     mapOf("deviceId" to deviceId, "message" to smsBody, "number" to smsSender, "action" to "RECEIVED")
